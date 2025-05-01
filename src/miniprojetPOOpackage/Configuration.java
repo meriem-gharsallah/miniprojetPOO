@@ -1,5 +1,4 @@
 package miniprojetPOOpackage;
-
 public class Configuration {
 	private Pretraiteur pretraiteur;
     private Indexe indexeur;
