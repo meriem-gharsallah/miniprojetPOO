@@ -16,4 +16,13 @@ public class NomAvecScore {
     public double getScore() {
         return score;
     }
+    public void setNom(Nom nom) {
+		this.nom = nom;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+
 }

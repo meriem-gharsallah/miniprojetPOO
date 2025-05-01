@@ -1,13 +1,15 @@
 package miniprojetPOOpackage;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelectionneurNMeuilleurs implements SelectionneurDeResultats {
-
-	@Override
-	public List<Nom> selectionner(List<Nom> noms) {
-		// TODO Auto-generated method stub
-		return null;
+    int N;
+    public SelectionneurNMeuilleurs(int N) {
+    	this.N=N;
+    }
+	public List<NomAvecScore> selectionner(List<NomAvecScore> noms) {
+        List<NomAvecScore> L2 = new ArrayList();
+		return L2;
 	}
 
 }

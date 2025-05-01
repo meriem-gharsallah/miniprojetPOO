@@ -1,8 +1,6 @@
 package miniprojetPOOpackage;
 import java.util.List;
 
-public interface Indexe {
-	
-	List<Nom> indexer(List<Nom> noms);
-
+public interface Indexe<T, R> {
+ R indexer(List<T> noms);
 }

@@ -3,5 +3,5 @@ import java.util.List;
 
 public interface Pretraiteur {
 	
-	List<Nom> traiter(List<Nom> noms);
+	List<Nom> pretraiter(List<Nom> noms);
 }

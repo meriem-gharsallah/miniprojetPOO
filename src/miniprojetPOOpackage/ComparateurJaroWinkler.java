@@ -1,16 +1,10 @@
 package miniprojetPOOpackage;
 
 public class ComparateurJaroWinkler implements ComparateurApproximatifdeChaine {
-
-	@Override
-	public double comparer(String s1, String s2) {
-		// TODO Auto-generated method stub
+    public double comparer(String s1, String s2) {
 		return 0;
 	}
-
-	@Override
 	public boolean estDistance() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

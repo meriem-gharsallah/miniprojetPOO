@@ -1,13 +1,12 @@
 package miniprojetPOOpackage;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class EncodagePhonetique implements Pretraiteur {
 
-	@Override
-	public List<Nom> traiter(List<Nom> noms) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Nom> pretraiter(List<Nom> noms) {
+		List<Nom> L2 = new ArrayList<>();
+		return L2;
 	}
 
 }
