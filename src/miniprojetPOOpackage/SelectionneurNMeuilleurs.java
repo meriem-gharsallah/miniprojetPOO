@@ -8,7 +8,7 @@ public class SelectionneurNMeuilleurs implements SelectionneurDeResultats {
     	this.N=N;
     }
 	public List<NomAvecScore> selectionner(List<NomAvecScore> noms) {
-        List<NomAvecScore> L2 = new ArrayList();
+        List<NomAvecScore> L2 = new ArrayList<NomAvecScore>();
 		return L2;
 	}
 

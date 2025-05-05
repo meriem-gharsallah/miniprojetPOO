@@ -23,7 +23,7 @@ public class MoteurDeRecherche {
 		 List<Nom> nomPretraiteListe = pretraitement.pretraiter(List.of(n));
 		 Nom nomPretraite = nomPretraiteListe.get(0);
 		 List<Couple> couples = candidats.generer(pretraiteListe, List.of(nomPretraite));
-		 List<NomAvecScore> resultats = new ArrayList();
+		 List<NomAvecScore> resultats = new ArrayList<NomAvecScore>();
 		    for (Couple c : couples) {
 		    	double r=comparateurnom.comparer(c.getNom1(), c.getNom2());
 		    	m.setNom(c.getNom2());
@@ -47,6 +47,48 @@ public class MoteurDeRecherche {
 	public List<NomAvecScore> comparer(List<Nom> L,List<Nom> L1) {
 		List<NomAvecScore> L2 = new ArrayList<>();
 		return L2;
+	}
+	public ComparateurNom getComparateurnom() {
+		return comparateurnom;
+	}
+	public void setComparateurnom(ComparateurNom comparateurnom) {
+		this.comparateurnom = comparateurnom;
+	}
+	public NomAvecScore getM() {
+		return m;
+	}
+	public void setM(NomAvecScore m) {
+		this.m = m;
+	}
+	public Configuration getConfiguration() {
+		return configuration;
+	}
+	public void setConfiguration(Configuration configuration) {
+		this.configuration = configuration;
+	}
+	public GenerateurDeCandidats getCandidats() {
+		return candidats;
+	}
+	public void setCandidats(GenerateurDeCandidats candidats) {
+		this.candidats = candidats;
+	}
+	public RecuperateurDeNoms getNomRecupere() {
+		return nomRecupere;
+	}
+	public void setNomRecupere(RecuperateurDeNoms nomRecupere) {
+		this.nomRecupere = nomRecupere;
+	}
+	public Pretraiteur getPretraitement() {
+		return pretraitement;
+	}
+	public void setPretraitement(Pretraiteur pretraitement) {
+		this.pretraitement = pretraitement;
+	}
+	public SelectionneurDeResultats getSelectionne() {
+		return selectionne;
+	}
+	public void setSelectionne(SelectionneurDeResultats selectionne) {
+		this.selectionne = selectionne;
 	}
 	
 }

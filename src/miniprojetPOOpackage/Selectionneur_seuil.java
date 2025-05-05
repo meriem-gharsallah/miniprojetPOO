@@ -12,5 +12,11 @@ public class Selectionneur_seuil implements SelectionneurDeResultats {
 		List<NomAvecScore> L2 = new ArrayList<>();
 		return L2;
 	}
+	public double getS() {
+		return s;
+	}
+	public void setS(double s) {
+		this.s = s;
+	}
 
 }

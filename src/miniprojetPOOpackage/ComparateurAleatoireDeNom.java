@@ -10,5 +10,11 @@ public class ComparateurAleatoireDeNom implements ComparateurNom {
 		
 		return 0;
 	}
+	public String getRefcomp() {
+		return refcomp;
+	}
+	public void setRefcomp(String refcomp) {
+		this.refcomp = refcomp;
+	}
 
 }
