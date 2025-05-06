@@ -28,20 +28,20 @@ public class NomAvecScore {
 	public String toString() {
         return "Nom: " + nom + ", Score:" + score ;
     }
-    @Override
-    public boolean equals(Object o) {
+	public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NomAvecScore n = (NomAvecScore) o;
-        return score == n.score &&
-               nom.equalsIgnoreCase(n.nom); // ignore case
+        NomAvecScore that = (NomAvecScore) o;
+        return Double.compare(that.score, score) == 0 &&
+               Objects.equals(nom, that.nom); // utilise equals() de Nom
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom.toLowerCase()); // cohérent avec equals
+        return Objects.hash(nom, score); // corrélé avec equals
     }
 }
 
 
-}
+
+

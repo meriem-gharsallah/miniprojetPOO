@@ -4,7 +4,6 @@ import java.util.List;
 
 public class MoteurDeRecherche {
 	private ComparateurNom comparateurnom;
-	private NomAvecScore m;
 	private Configuration configuration;
 	private GenerateurDeCandidats candidats;
 	private RecuperateurDeNoms nomRecupere;
@@ -14,7 +13,6 @@ public class MoteurDeRecherche {
 			GenerateurDeCandidats candidats, RecuperateurDeNoms nomRecupere, Pretraiteur pretraitement,
 			SelectionneurDeResultats selectionne) {
 		this.comparateurnom = comparateurnom;
-		this.m = m;
 		this.configuration = configuration;
 		this.candidats = candidats;
 		this.nomRecupere = nomRecupere;
@@ -31,13 +29,16 @@ public class MoteurDeRecherche {
 		 List<Couple> couples = candidats.generer(pretraiteListe, List.of(nomPretraite));
 		 List<NomAvecScore> resultats = new ArrayList<NomAvecScore>();
 		    for (Couple c : couples) {
+		    	Nom n1=new Nom(5,"kk");
+		    	NomAvecScore m =new NomAvecScore(n1,5);
 		    	double r=comparateurnom.comparer(c.getNom1(), c.getNom2());
-		    	m.setNom(c.getNom2());
+		    	m.setNom(c.getNom1());
 		    	m.setScore(r);
 		        resultats.add(m);
 		    	
-	
+		        
 		    }
+		    
 		    L2=selectionne.selectionner(resultats);
 
 		
@@ -61,12 +62,7 @@ public class MoteurDeRecherche {
 	public void setComparateurnom(ComparateurNom comparateurnom) {
 		this.comparateurnom = comparateurnom;
 	}
-	public NomAvecScore getM() {
-		return m;
-	}
-	public void setM(NomAvecScore m) {
-		this.m = m;
-	}
+
 	public Configuration getConfiguration() {
 		return configuration;
 	}

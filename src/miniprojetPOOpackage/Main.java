@@ -21,13 +21,13 @@ public class Main {
         Nom n4=new Nom(1,"meriem GHarsallah");
         Nom n5=new Nom(5,"HamZA SOUSSI");
         Nom n6=new Nom(6,"MOHamed salah abiD");
-        System.out.println(n1.equals(n4));
+        //System.out.println(n1.equals(n4));
         l2.add(n4);
         l2.add(n5);
         l2.add(n6);
-        for (Nom n : l) {
-            System.out.println(n);
-        };
+        //for (Nom n : l) {
+            //System.out.println(n);
+        //};
         
         
         List<Nom> l1=new ArrayList<Nom>();
@@ -41,21 +41,22 @@ public class Main {
     	SelectionneurAleatoire s=new SelectionneurAleatoire();
     	RecuperateurListe r=new RecuperateurListe(l);
     	GenerateurDeCandidatsAleatoire g=new GenerateurDeCandidatsAleatoire();
+    	System.out.println(g.generer(l1, List.of(n1)));
     	IndexeList I=new IndexeList();
     	Configuration config=new Configuration(p, I, c,
     			g, s, 0.7, 10);
     	NomAvecScore n=new NomAvecScore(n1,2);
 		System.out.println(c);
 		
-		for (Nom i:l1) {
-			for (Nom j:l3) {
-			    double a;
-				a=c.comparer(i, j);
-				System.out.println(a);
+		//for (Nom i:l1) {
+			//for (Nom j:l3) {
+			    //double a;
+				//a=c.comparer(i, j);
+				//System.out.println(a);
 				
-			}
+			//}
 			
-		}
+		//}
 		MoteurDeRecherche m=new MoteurDeRecherche(c, n,config,g, r, p,s);
 		List<NomAvecScore> l5=new ArrayList<NomAvecScore>();
 		l5=m.rechercher(l1, n1);

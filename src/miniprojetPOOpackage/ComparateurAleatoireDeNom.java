@@ -1,6 +1,6 @@
 package miniprojetPOOpackage;
 
-<<<<<<< HEAD
+
 import java.util.Objects;
 
 public class ComparateurAleatoireDeNom implements ComparateurNom {
@@ -45,14 +45,5 @@ public class ComparateurAleatoireDeNom implements ComparateurNom {
 		return Objects.equals(refcomp, other.refcomp);
 	}
 	
-=======
-public class ComparateurAleatoireDeNom implements ComparateurNom {
-
-	@Override
-	public double comparer(Nom n1, Nom n2) {
-		
-		return 0;
-	}
-
->>>>>>> branch 'main' of https://github.com/meriem-gharsallah/miniprojetPOO.git
+	
 }
