@@ -2,9 +2,9 @@ package miniprojetPOOpackage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Selectionneur_pourcentage implements SelectionneurDeResultats {
+public class SelectionneurPourcentage implements SelectionneurDeResultats {
     double p;
-    public Selectionneur_pourcentage(double p) {
+    public SelectionneurPourcentage(double p) {
     	this.p=p;
     }
 	public List<NomAvecScore> selectionner(List<NomAvecScore> noms) {

@@ -10,16 +10,22 @@ public class MoteurDeRecherche {
 	private RecuperateurDeNoms nomRecupere;
 	private Pretraiteur pretraitement;
 	private SelectionneurDeResultats selectionne;
-	public void MoteurDeRecherche(ComparateurNom comparateurnom,Configuration configuration,GenerateurDeCandidats candidats,RecuperateurDeNoms nomRecupere,Pretraiteur pretraitement,SelectionneurDeResultats selectionne) {
-		this.comparateurnom=comparateurnom;
-		this.configuration=configuration;
-		this.candidats=candidats;
-		this.nomRecupere=nomRecupere;
-		this.pretraitement=pretraitement;
-		this.selectionne=selectionne;
+	public MoteurDeRecherche(ComparateurNom comparateurnom, NomAvecScore m, Configuration configuration,
+			GenerateurDeCandidats candidats, RecuperateurDeNoms nomRecupere, Pretraiteur pretraitement,
+			SelectionneurDeResultats selectionne) {
+		this.comparateurnom = comparateurnom;
+		this.m = m;
+		this.configuration = configuration;
+		this.candidats = candidats;
+		this.nomRecupere = nomRecupere;
+		this.pretraitement = pretraitement;
+		this.selectionne = selectionne;
 	}
-	public List<Nom> rechercher(List<Nom> L,Nom n) {
+	
+	
+	public List<NomAvecScore> rechercher(List<Nom> L,Nom n) {
 		 List<Nom> pretraiteListe = pretraitement.pretraiter(L);
+		 List<NomAvecScore> L2 = new ArrayList<NomAvecScore>();
 		 List<Nom> nomPretraiteListe = pretraitement.pretraiter(List.of(n));
 		 Nom nomPretraite = nomPretraiteListe.get(0);
 		 List<Couple> couples = candidats.generer(pretraiteListe, List.of(nomPretraite));
@@ -29,15 +35,16 @@ public class MoteurDeRecherche {
 		    	m.setNom(c.getNom2());
 		    	m.setScore(r);
 		        resultats.add(m);
-		    	selectionne.selectionner(resultats);
+		    	
 	
 		    }
+		    L2=selectionne.selectionner(resultats);
 
 		
 		
 		
 		
-		List<Nom> L2 = new ArrayList<>();
+		
 		return L2;
 	}
 	public List<Nom> dedupliquer(List<Nom> L) {

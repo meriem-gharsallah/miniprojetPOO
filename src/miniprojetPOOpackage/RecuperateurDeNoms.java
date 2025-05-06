@@ -3,6 +3,6 @@ import java.util.List;
 
 public interface RecuperateurDeNoms {
 	
-	List<Nom> recuperer();
+	 List<Nom> recuperer();
 
 }

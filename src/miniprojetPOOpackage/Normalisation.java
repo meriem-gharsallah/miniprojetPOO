@@ -8,5 +8,8 @@ public class Normalisation implements Pretraiteur {
 		List<Nom> L2 = new ArrayList<>();
 		return L2;
 	}
+	public String toString() {
+        return "Normalisation";
+    }
 
 }
