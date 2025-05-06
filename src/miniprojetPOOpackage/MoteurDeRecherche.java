@@ -49,9 +49,26 @@ public class MoteurDeRecherche {
 		return L2;
 	}
 	public List<Nom> dedupliquer(List<Nom> L) {
-		List<Nom> L2 = new ArrayList<>();
-		return L2;
+	    List<Nom> L1 = new ArrayList<Nom>();
+
+	    for (int i = 0; i < L.size(); i++) {
+	        boolean estDoublon = false;
+
+	        for (int j = 0; j < L1.size(); j++) {
+	            if (comparateurnom.comparer(L.get(i), L1.get(j)) == 1.0) {
+	                estDoublon = true;
+	                break;
+	            }
+	        }
+
+	        if (!estDoublon) {
+	            L1.add(L.get(i));
+	        }
+	    }
+
+	    return L1;
 	}
+
 	public List<NomAvecScore> comparer(List<Nom> L,List<Nom> L1) {
 		List<NomAvecScore> L2 = new ArrayList<>();
 		return L2;

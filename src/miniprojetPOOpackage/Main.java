@@ -12,8 +12,10 @@ public class Main {
     public static void main(String[] args) {
     	List<Nom> l=new ArrayList<Nom>();
         Nom n1=new Nom(1,"meriem GHarsallah");
+        Nom n0=new Nom(1,"meriem GHarsallah");
         Nom n2=new Nom(2,"Hamza SOUssi");
         Nom n3=new Nom(3,"MOHamed SALAH abiD");
+        l.add(n0);
         l.add(n1);
         l.add(n2);
         l.add(n3);
@@ -59,8 +61,11 @@ public class Main {
 		//}
 		MoteurDeRecherche m=new MoteurDeRecherche(c, n,config,g, r, p,s);
 		List<NomAvecScore> l5=new ArrayList<NomAvecScore>();
+		List<Nom> l6=new ArrayList<Nom>();
 		l5=m.rechercher(l1, n1);
 		System.out.println(l5);
+		l6=m.dedupliquer(l1);
+		System.out.println(l6);
         Scanner scanner = new Scanner(System.in);
         int choix = -1;
 
