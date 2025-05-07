@@ -50,12 +50,13 @@ public class MoteurDeRecherche {
 	}
 	public List<Nom> dedupliquer(List<Nom> L) {
 	    List<Nom> L1 = new ArrayList<Nom>();
+	    
 
 	    for (int i = 0; i < L.size(); i++) {
 	        boolean estDoublon = false;
 
 	        for (int j = 0; j < L1.size(); j++) {
-	            if (comparateurnom.comparer(L.get(i), L1.get(j)) == 1.0) {
+	            if (comparateurnom.comparer(L.get(i), L1.get(j)) >= configuration.getSeuil()) {
 	                estDoublon = true;
 	                break;
 	            }

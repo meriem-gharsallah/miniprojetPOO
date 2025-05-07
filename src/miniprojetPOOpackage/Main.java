@@ -39,7 +39,7 @@ public class Main {
         l3=p.pretraiter(l2);
         System.out.println(l1);
         System.out.println(l3);
-    	ComparateurAleatoireDeNom c=new ComparateurAleatoireDeNom("abc");
+    	ComparateurEgaliteExacte c=new ComparateurEgaliteExacte("abc");
     	SelectionneurAleatoire s=new SelectionneurAleatoire();
     	RecuperateurListe r=new RecuperateurListe(l);
     	GenerateurDeCandidatsAleatoire g=new GenerateurDeCandidatsAleatoire();
