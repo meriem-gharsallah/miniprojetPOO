@@ -3,35 +3,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MoteurDeRecherche {
-	private ComparateurNom comparateurnom;
 	private Configuration configuration;
-	private GenerateurDeCandidats candidats;
-	private RecuperateurDeNoms nomRecupere;
-	private Pretraiteur pretraitement;
-	private SelectionneurDeResultats selectionne;
-	public MoteurDeRecherche(ComparateurNom comparateurnom, NomAvecScore m, Configuration configuration,
-			GenerateurDeCandidats candidats, RecuperateurDeNoms nomRecupere, Pretraiteur pretraitement,
-			SelectionneurDeResultats selectionne) {
-		this.comparateurnom = comparateurnom;
-		this.configuration = configuration;
-		this.candidats = candidats;
-		this.nomRecupere = nomRecupere;
-		this.pretraitement = pretraitement;
-		this.selectionne = selectionne;
-	}
-	
-	
+	public MoteurDeRecherche(Configuration configuration) {
+		this.configuration = configuration;}
 	public List<NomAvecScore> rechercher(List<Nom> L,Nom n) {
-		 List<Nom> pretraiteListe = pretraitement.pretraiter(L);
+		 List<Nom> pretraiteListe = configuration.getPretraiteur().pretraiter(L);
 		 List<NomAvecScore> L2 = new ArrayList<NomAvecScore>();
-		 List<Nom> nomPretraiteListe = pretraitement.pretraiter(List.of(n));
+		 List<Nom> nomPretraiteListe = configuration.getPretraiteur().pretraiter(List.of(n));
 		 Nom nomPretraite = nomPretraiteListe.get(0);
-		 List<Couple> couples = candidats.generer(pretraiteListe, List.of(nomPretraite));
+		 List<Couple> couples = configuration.getGenerateur().generer(pretraiteListe, List.of(nomPretraite));
 		 List<NomAvecScore> resultats = new ArrayList<NomAvecScore>();
 		    for (Couple c : couples) {
 		    	Nom n1=new Nom(5,"kk");
 		    	NomAvecScore m =new NomAvecScore(n1,5);
-		    	double r=comparateurnom.comparer(c.getNom1(), c.getNom2());
+		    	double r=configuration.getComparateur().comparer(c.getNom1(), c.getNom2());
 		    	m.setNom(c.getNom1());
 		    	m.setScore(r);
 		        resultats.add(m);
@@ -39,7 +24,7 @@ public class MoteurDeRecherche {
 		        
 		    }
 		    
-		    L2=selectionne.selectionner(resultats);
+		    L2=configuration.getSelectionneur().selectionner(resultats);
 
 		
 		
@@ -56,7 +41,7 @@ public class MoteurDeRecherche {
 	        boolean estDoublon = false;
 
 	        for (int j = 0; j < L1.size(); j++) {
-	            if (comparateurnom.comparer(L.get(i), L1.get(j)) >= configuration.getSeuil()) {
+	            if (configuration.getComparateur().comparer(L.get(i), L1.get(j)) >= configuration.getSeuil()) {
 	                estDoublon = true;
 	                break;
 	            }
@@ -73,43 +58,6 @@ public class MoteurDeRecherche {
 	public List<NomAvecScore> comparer(List<Nom> L,List<Nom> L1) {
 		List<NomAvecScore> L2 = new ArrayList<>();
 		return L2;
-	}
-	public ComparateurNom getComparateurnom() {
-		return comparateurnom;
-	}
-	public void setComparateurnom(ComparateurNom comparateurnom) {
-		this.comparateurnom = comparateurnom;
-	}
-
-	public Configuration getConfiguration() {
-		return configuration;
-	}
-	public void setConfiguration(Configuration configuration) {
-		this.configuration = configuration;
-	}
-	public GenerateurDeCandidats getCandidats() {
-		return candidats;
-	}
-	public void setCandidats(GenerateurDeCandidats candidats) {
-		this.candidats = candidats;
-	}
-	public RecuperateurDeNoms getNomRecupere() {
-		return nomRecupere;
-	}
-	public void setNomRecupere(RecuperateurDeNoms nomRecupere) {
-		this.nomRecupere = nomRecupere;
-	}
-	public Pretraiteur getPretraitement() {
-		return pretraitement;
-	}
-	public void setPretraitement(Pretraiteur pretraitement) {
-		this.pretraitement = pretraitement;
-	}
-	public SelectionneurDeResultats getSelectionne() {
-		return selectionne;
-	}
-	public void setSelectionne(SelectionneurDeResultats selectionne) {
-		this.selectionne = selectionne;
 	}
 	
 }

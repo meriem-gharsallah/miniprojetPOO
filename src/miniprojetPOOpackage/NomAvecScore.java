@@ -33,12 +33,12 @@ public class NomAvecScore {
         if (o == null || getClass() != o.getClass()) return false;
         NomAvecScore that = (NomAvecScore) o;
         return Double.compare(that.score, score) == 0 &&
-               Objects.equals(nom, that.nom); // utilise equals() de Nom
+               Objects.equals(nom, that.nom); 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nom, score); // corrélé avec equals
+        return Objects.hash(nom, score);
     }
 }
 

@@ -26,11 +26,11 @@ public class Nom {
         if (o == null || getClass() != o.getClass()) return false;
         Nom n = (Nom) o;
         return id == n.id &&
-               nom.equalsIgnoreCase(n.nom); // ignore case
+               nom.equalsIgnoreCase(n.nom); 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nom.toLowerCase()); // cohérent avec equals
+        return Objects.hash(id, nom.toLowerCase());
     }
 }

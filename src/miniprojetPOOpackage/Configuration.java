@@ -1,42 +1,49 @@
 package miniprojetPOOpackage;
 public class Configuration {
-	private Pretraiteur pretraiteur;
-    private Indexe indexeur;
-    private ComparateurNom comparateur;
-    private GenerateurDeCandidats generateur;
-    private SelectionneurDeResultats selectionneur;
+    private String nomPretraiteur;
+    private String nomIndexeur;
+    private String nomComparateur;
+    private String nomGenerateur;
+    private String nomSelectionneur;
     private double seuil;
     private int nombreMax;
-	public Configuration(Pretraiteur pretraiteur, Indexe indexeur, ComparateurNom comparateur,
-			GenerateurDeCandidats generateur, SelectionneurDeResultats selectionneur, double seuil, int nombreMax) {
-		
-		this.pretraiteur = pretraiteur;
-		this.indexeur = indexeur;
-		this.comparateur = comparateur;
-		this.generateur = generateur;
-		this.selectionneur = selectionneur;
-		this.seuil = seuil;
-		this.nombreMax = nombreMax;
-	}
-	public Pretraiteur getPretraiteur() {
-		return pretraiteur;
-	}
-	public Indexe getIndexeur() {
-		return indexeur;
-	}
-	public ComparateurNom getComparateur() {
-		return comparateur;
-	}
-	public GenerateurDeCandidats getGenerateur() {
-		return generateur;
-	}
-	public SelectionneurDeResultats getSelectionneur() {
-		return selectionneur;
-	}
-	public double getSeuil() {
-		return seuil;
-	}
-	public int getNombreMax() {
-		return nombreMax;
-	}
+
+    public Configuration(String nomPretraiteur, String nomIndexe, String nomComparateur,
+                         String nomGenerateur, String nomSelectionneur, double seuil, int nombreMax) {
+        this.nomPretraiteur = nomPretraiteur;
+        this.nomIndexeur = nomIndexe;
+        this.nomComparateur = nomComparateur;
+        this.nomGenerateur = nomGenerateur;
+        this.nomSelectionneur = nomSelectionneur;
+        this.seuil = seuil;
+        this.nombreMax = nombreMax;
+    }
+
+    public Pretraiteur getPretraiteur() {
+        return ConcretiserConfiguration.getPretraiteur(nomPretraiteur);
+    }
+
+    public Indexe getIndexe() {
+        return ConcretiserConfiguration.getIndexe(nomIndexeur);
+    }
+
+    public ComparateurNom getComparateur() {
+        return ConcretiserConfiguration.getComparateur(nomComparateur);
+    }
+
+    public GenerateurDeCandidats getGenerateur() {
+        return ConcretiserConfiguration.getGenerateur(nomGenerateur);
+    }
+
+    public SelectionneurDeResultats getSelectionneur() {
+        return ConcretiserConfiguration.getSelectionneur(nomSelectionneur);
+    }
+
+    public double getSeuil() {
+        return seuil;
+    }
+
+    public int getNombreMax() {
+        return nombreMax;
+    }
 }

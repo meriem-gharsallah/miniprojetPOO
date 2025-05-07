@@ -39,16 +39,16 @@ public class Main {
         l3=p.pretraiter(l2);
         System.out.println(l1);
         System.out.println(l3);
-    	ComparateurEgaliteExacte c=new ComparateurEgaliteExacte("abc");
+        ComparateurEgaliteExacte c =new ComparateurEgaliteExacte();
     	SelectionneurAleatoire s=new SelectionneurAleatoire();
     	RecuperateurListe r=new RecuperateurListe(l);
     	GenerateurDeCandidatsAleatoire g=new GenerateurDeCandidatsAleatoire();
     	System.out.println(g.generer(l1, List.of(n1)));
     	IndexeList I=new IndexeList();
-    	Configuration config=new Configuration(p, I, c,
-    			g, s, 0.7, 10);
+    	Configuration config=new Configuration("Pretraiteur aleatoire", "Liste", "Egalite exacte",
+    			"GenerateurDeCandidatsAleatoire", "SelectionneurAleatoire", 0.7, 10);
     	NomAvecScore n=new NomAvecScore(n1,2);
-		System.out.println(c);
+		//System.out.println(c);
 		
 		//for (Nom i:l1) {
 			//for (Nom j:l3) {
@@ -59,7 +59,7 @@ public class Main {
 			//}
 			
 		//}
-		MoteurDeRecherche m=new MoteurDeRecherche(c, n,config,g, r, p,s);
+		MoteurDeRecherche m=new MoteurDeRecherche(config);
 		List<NomAvecScore> l5=new ArrayList<NomAvecScore>();
 		List<Nom> l6=new ArrayList<Nom>();
 		l5=m.rechercher(l1, n2);
