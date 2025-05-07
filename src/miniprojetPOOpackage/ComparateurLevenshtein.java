@@ -56,8 +56,4 @@ public class ComparateurLevenshtein implements ComparateurApproximatifdeChaine {
 
 }
 
-
-
-
-
-
+//source:https://github.com/rrice/java-string-similarity/blob/master/src/main/java/net/ricecode/similarity/LevenshteinDistanceStrategy.java
