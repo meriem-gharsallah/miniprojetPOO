@@ -14,10 +14,6 @@ public class Main {
             default: throw new IllegalArgumentException("Prétraiteur inconnu : " + nom);
         }
     }
-
-    
-    
-
     public static ComparateurNom getComparateur(String nom) {
     	switch (nom) {
         case "Egalite exacte": return new ComparateurEgaliteExacte();
@@ -52,13 +48,6 @@ public class Main {
     public static void main(String[] args) {
     	List<Nom> l=new ArrayList<Nom>();
         Nom n1=new Nom("NK-24isa6tapAYCqtEnqbUdzv","DEMIDOVICH VASILIJ");
-        /*Nom n0=new Nom(1,"meriem GHarsallah");
-        Nom n2=new Nom(2,"Hamza SOUssi");
-        Nom n3=new Nom(3,"MOHamed SALAH abiD");
-        l.add(n0);
-        l.add(n1);
-        l.add(n2);
-        l.add(n3);*/
         RecuperateurCSV r = new RecuperateurCSV("fichier.csv");
         l= r.recuperer();
         System.out.println("Répertoire courant : " + System.getProperty("user.dir"));
@@ -68,13 +57,6 @@ public class Main {
             
         }
         List<Nom> l2=new ArrayList<Nom>();
-        /*Nom n4=new Nom(1,"meriem GHarsallah");
-        Nom n5=new Nom(5,"HamZA SOUSSI");
-        Nom n6=new Nom(6,"MOHamed salah abiD");
-        //System.out.println(n1.equals(n4));
-        l2.add(n4);
-        l2.add(n5);
-        l2.add(n6);*/
         r.setCheminFichier("fichier2.csv");
         l2 = r.recuperer();
         ComparateurEgaliteExacte c =new ComparateurEgaliteExacte();
@@ -103,21 +85,7 @@ public class Main {
 		System.out.println(l5);
 		l6=m.dedupliquer(l);
 		System.out.println(l6);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-        Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
         int choix = -1;
 
         while (choix != 5) {
