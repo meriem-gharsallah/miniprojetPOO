@@ -9,6 +9,9 @@ public class Nom {
         this.id = id;
         this.nom = nom;
     }
+    public Nom(Nom autreNom) {
+        this.nom = autreNom.nom;
+    }
 
     public int getId() {
         return id;
@@ -25,8 +28,7 @@ public class Nom {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Nom n = (Nom) o;
-        return id == n.id &&
-               nom.equalsIgnoreCase(n.nom); 
+        return nom.equalsIgnoreCase(n.nom); 
     }
 
     @Override

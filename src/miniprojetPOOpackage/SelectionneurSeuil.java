@@ -8,8 +8,8 @@ public class SelectionneurSeuil implements SelectionneurDeResultats {
     public SelectionneurSeuil(double s) {
     	this.s=s;
     }
-	public List<NomAvecScore> selectionner(List<NomAvecScore> noms) {
-		List<NomAvecScore> L2 = new ArrayList<>();
+	public List<CoupleDeNomsAvecScore> selectionner(List<CoupleDeNomsAvecScore> noms) {
+		List<CoupleDeNomsAvecScore> L2 = new ArrayList<>();
 		return L2;
 	}
 	public double getS() {

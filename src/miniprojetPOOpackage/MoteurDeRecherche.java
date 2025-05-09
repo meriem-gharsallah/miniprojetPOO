@@ -1,38 +1,54 @@
 package miniprojetPOOpackage;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MoteurDeRecherche {
-	private Configuration configuration;
-	public MoteurDeRecherche(Configuration configuration) {
-		this.configuration = configuration;}
-	public List<NomAvecScore> rechercher(List<Nom> L,Nom n) {
-		 List<Nom> pretraiteListe = configuration.getPretraiteur().pretraiter(L);
-		 List<NomAvecScore> L2 = new ArrayList<NomAvecScore>();
-		 List<Nom> nomPretraiteListe = configuration.getPretraiteur().pretraiter(List.of(n));
-		 Nom nomPretraite = nomPretraiteListe.get(0);
-		 List<Couple> couples = configuration.getGenerateur().generer(pretraiteListe, List.of(nomPretraite));
-		 List<NomAvecScore> resultats = new ArrayList<NomAvecScore>();
-		    for (Couple c : couples) {
-		    	Nom n1=new Nom(5,"kk");
-		    	NomAvecScore m =new NomAvecScore(n1,5);
-		    	double r=configuration.getComparateur().comparer(c.getNom1(), c.getNom2());
-		    	m.setNom(c.getNom1());
-		    	m.setScore(r);
-		        resultats.add(m);
-		    	
-		        
-		    }
-		    
-		    L2=configuration.getSelectionneur().selectionner(resultats);
+    private GenerateurDeCandidats generateur;
+    private SelectionneurDeResultats selectionneur;
+    private List<Pretraiteur> listeDesPretraiteurs;
+    private ComparateurNom comparateur;
+    private Configuration configuration;
+    private double seuil;
+    private int nombreMax;
 
-		
-		
-		
-		
-		
-		return L2;
-	}
+    public MoteurDeRecherche(GenerateurDeCandidats generateur,
+                              SelectionneurDeResultats selectionneur,
+                              List<Pretraiteur> listeDesPretraiteurs,
+                              ComparateurNom comparateur,
+                              Configuration configuration,
+                              double seuil,
+                              int nombreMax) {
+        this.generateur = generateur;
+        this.selectionneur = selectionneur;
+        this.listeDesPretraiteurs = listeDesPretraiteurs;
+        this.comparateur = comparateur;
+        this.configuration = configuration;
+        this.seuil = seuil;
+        this.nombreMax = nombreMax;
+    }
+    private List<Nom> appliquerPretraiteurs(List<Nom> noms) {
+        for (String nomPretraiteur : configuration.getNomsPretraiteurs()) {
+            noms = Main.getPretraiteur(nomPretraiteur).pretraiter(noms);
+        }
+        return noms;
+    }
+    public List<CoupleDeNomsAvecScore> rechercher(List<Nom> liste, Nom n) {
+        List<Nom> listePretraitee = new ArrayList<>(liste);
+        Nom copie = new Nom(n);
+        listePretraitee = appliquerPretraiteurs(listePretraitee);
+        copie = appliquerPretraiteurs(List.of(copie)).get(0);
+        List<CoupleDeNoms> couples = Main.getGenerateur(configuration.getNomGenerateur()).generer(listePretraitee, List.of(copie));
+        List<CoupleDeNomsAvecScore> resultats = new ArrayList<>();
+        for (CoupleDeNoms couple : couples) {
+            double score = Main.getComparateur(configuration.getNomComparateur())
+                               .comparer(couple.getNom1(), couple.getNom2());
+            resultats.add(new CoupleDeNomsAvecScore(couple.getNom1(),couple.getNom2(), score));
+            System.out.println(couple);	
+            System.out.println(score);	
+        }
+        return Main.getSelectionneur(configuration.getNomSelectionneur()).selectionner(resultats);
+    }
 	public List<Nom> dedupliquer(List<Nom> L) {
 	    List<Nom> L1 = new ArrayList<Nom>();
 	    
@@ -41,7 +57,7 @@ public class MoteurDeRecherche {
 	        boolean estDoublon = false;
 
 	        for (int j = 0; j < L1.size(); j++) {
-	            if (configuration.getComparateur().comparer(L.get(i), L1.get(j)) >= configuration.getSeuil()) {
+	            if (Main.getComparateur(configuration.getNomComparateur()).comparer(L.get(i), L1.get(j)) >= configuration.getSeuil()) {
 	                estDoublon = true;
 	                break;
 	            }

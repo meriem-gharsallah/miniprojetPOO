@@ -3,6 +3,6 @@ package miniprojetPOOpackage;
 import java.util.List;
 
 public interface SelectionneurDeResultats {
-	List<NomAvecScore> selectionner(List<NomAvecScore> noms);
+	List<CoupleDeNomsAvecScore> selectionner(List<CoupleDeNomsAvecScore> noms);
 
 }

@@ -1,71 +1,115 @@
 package miniprojetPOOpackage;
-
 import java.util.Scanner;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedHashMap;
 
 public class Main {
+	public static Pretraiteur getPretraiteur(String nom) {
+        switch (nom) {
+            case "Normalisation": return new Normalisation();
+            case "Pretraiteur aleatoire": return new PretraiteurAleatoire();
+            case "Encodage Phonétique": return new EncodagePhonetique();
+            default: throw new IllegalArgumentException("Prétraiteur inconnu : " + nom);
+        }
+    }
+
+    
+    
+
+    public static ComparateurNom getComparateur(String nom) {
+    	switch (nom) {
+        case "Egalite exacte": return new ComparateurEgaliteExacte();
+        default: throw new IllegalArgumentException("comparateur inconnu : " + nom);
+    }
+    }
+
+    public static GenerateurDeCandidats getGenerateur(String nom) {
+    	switch (nom) {
+        //case "GenerateurDeCandidatsAvecIndex": return new GenerateurDeCandidatsAvecIndex();
+        case "GenerateurDeCandidatsAleatoire": return new GenerateurDeCandidatsAleatoire();
+        default: throw new IllegalArgumentException("generateur inconnu : " + nom);
+    }
+    }
+
+    public static SelectionneurDeResultats getSelectionneur(String nom) {
+    	switch (nom) {
+        case "SelectionneurAleatoire": return new SelectionneurAleatoire();
+        case "SelectionneurNMeilleurs": return new SelectionneurNMeuilleurs(10);
+        case "SelectionneurPourcentage": return new SelectionneurPourcentage(80);
+        default: throw new IllegalArgumentException("selectionneur inconnu : " + nom);
+    }
+    }
 
     public static void main(String[] args) {
     	List<Nom> l=new ArrayList<Nom>();
         Nom n1=new Nom(1,"meriem GHarsallah");
-        Nom n0=new Nom(1,"meriem GHarsallah");
+        /*Nom n0=new Nom(1,"meriem GHarsallah");
         Nom n2=new Nom(2,"Hamza SOUssi");
         Nom n3=new Nom(3,"MOHamed SALAH abiD");
         l.add(n0);
         l.add(n1);
         l.add(n2);
-        l.add(n3);
+        l.add(n3);*/
+        RecuperateurCSV r = new RecuperateurCSV("fichier.csv");
+        l= r.recuperer();
+        System.out.println("Répertoire courant : " + System.getProperty("user.dir"));
+
+        for (Nom n : l) {
+            System.out.println(n.getId() +" " + n.getNom());
+            
+        }
         List<Nom> l2=new ArrayList<Nom>();
-        Nom n4=new Nom(1,"meriem GHarsallah");
+        /*Nom n4=new Nom(1,"meriem GHarsallah");
         Nom n5=new Nom(5,"HamZA SOUSSI");
         Nom n6=new Nom(6,"MOHamed salah abiD");
         //System.out.println(n1.equals(n4));
         l2.add(n4);
         l2.add(n5);
-        l2.add(n6);
-        //for (Nom n : l) {
-            //System.out.println(n);
-        //};
-        
-        
-        List<Nom> l1=new ArrayList<Nom>();
-        List<Nom> l3=new ArrayList<Nom>();
-        PretraiteurAleatoire p=new PretraiteurAleatoire();
-        l1=p.pretraiter(l);
-        l3=p.pretraiter(l2);
-        System.out.println(l1);
-        System.out.println(l3);
+        l2.add(n6);*/
+        r.setCheminFichier("fichier2.csv");
+        l2 = r.recuperer();
         ComparateurEgaliteExacte c =new ComparateurEgaliteExacte();
     	SelectionneurAleatoire s=new SelectionneurAleatoire();
-    	RecuperateurListe r=new RecuperateurListe(l);
+    	//RecuperateurListe r=new RecuperateurListe(l);
     	GenerateurDeCandidatsAleatoire g=new GenerateurDeCandidatsAleatoire();
-    	System.out.println(g.generer(l1, List.of(n1)));
-    	IndexeList I=new IndexeList();
-    	Configuration config=new Configuration("Pretraiteur aleatoire", "Liste", "Egalite exacte",
+    	/*System.out.println(g.generer(l1, List.of(n1)));*/
+    	List<String> p=new ArrayList<String>();
+    	p.add("Pretraiteur aleatoire");
+    	p.add("Pretraiteur aleatoire");
+
+    	Configuration config=new Configuration(p, "Liste", "Egalite exacte",
     			"GenerateurDeCandidatsAleatoire", "SelectionneurAleatoire", 0.7, 10);
     	NomAvecScore n=new NomAvecScore(n1,2);
-		//System.out.println(c);
-		
-		//for (Nom i:l1) {
-			//for (Nom j:l3) {
-			    //double a;
-				//a=c.comparer(i, j);
-				//System.out.println(a);
-				
-			//}
+    	List<Pretraiteur> liste=new ArrayList<Pretraiteur>();
+    	for(int i=0;i<config.getNomsPretraiteurs().size();i++) {
+			liste.add(getPretraiteur(config.getNomsPretraiteurs().get(i)));
 			
-		//}
-		MoteurDeRecherche m=new MoteurDeRecherche(config);
-		List<NomAvecScore> l5=new ArrayList<NomAvecScore>();
-		List<Nom> l6=new ArrayList<Nom>();
-		l5=m.rechercher(l1, n2);
+			
+		}
+		MoteurDeRecherche m=new MoteurDeRecherche(Main.getGenerateur(config.getNomGenerateur()), Main.getSelectionneur(config.getNomSelectionneur()),
+				liste, Main.getComparateur(config.getNomComparateur()), config,0.7, 10);
+		List<CoupleDeNomsAvecScore> l5=new ArrayList<CoupleDeNomsAvecScore>();
+		List<Nom> l6=new ArrayList<Nom>();	
+		l5=m.rechercher(l, n1);
 		System.out.println(l5);
-		l6=m.dedupliquer(l1);
+		l6=m.dedupliquer(l);
 		System.out.println(l6);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
         Scanner scanner = new Scanner(System.in);
         int choix = -1;
 

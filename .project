@@ -14,4 +14,16 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>fichier.csv</name>
+			<type>1</type>
+			<location>C:/Users/Meriem Gharsallah/Downloads/poo/poo/fichier.csv</location>
+		</link>
+		<link>
+			<name>fichier2.csv</name>
+			<type>1</type>
+			<location>C:/Users/Meriem Gharsallah/Downloads/poo/poo/fichier2.csv</location>
+		</link>
+	</linkedResources>
 </projectDescription>

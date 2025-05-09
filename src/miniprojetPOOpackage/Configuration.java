@@ -1,6 +1,8 @@
 package miniprojetPOOpackage;
+import java.util.ArrayList;
+import java.util.List;
 public class Configuration {
-    private String nomPretraiteur;
+    private List<String> nomsPretraiteurs;
     private String nomIndexeur;
     private String nomComparateur;
     private String nomGenerateur;
@@ -8,9 +10,9 @@ public class Configuration {
     private double seuil;
     private int nombreMax;
 
-    public Configuration(String nomPretraiteur, String nomIndexe, String nomComparateur,
+    public Configuration(List<String> nomsPretraiteurs, String nomIndexe, String nomComparateur,
                          String nomGenerateur, String nomSelectionneur, double seuil, int nombreMax) {
-        this.nomPretraiteur = nomPretraiteur;
+        this.nomsPretraiteurs = nomsPretraiteurs;
         this.nomIndexeur = nomIndexe;
         this.nomComparateur = nomComparateur;
         this.nomGenerateur = nomGenerateur;
@@ -19,7 +21,35 @@ public class Configuration {
         this.nombreMax = nombreMax;
     }
 
-    public Pretraiteur getPretraiteur() {
+	public List<String> getNomsPretraiteurs() {
+		return nomsPretraiteurs;
+	}
+
+	public String getNomIndexeur() {
+		return nomIndexeur;
+	}
+
+	public String getNomComparateur() {
+		return nomComparateur;
+	}
+
+	public String getNomGenerateur() {
+		return nomGenerateur;
+	}
+
+	public String getNomSelectionneur() {
+		return nomSelectionneur;
+	}
+
+	public double getSeuil() {
+		return seuil;
+	}
+
+	public int getNombreMax() {
+		return nombreMax;
+	}
+
+    /*public Pretraiteur getPretraiteur() {
         return ConcretiserConfiguration.getPretraiteur(nomPretraiteur);
     }
 
@@ -45,5 +75,5 @@ public class Configuration {
 
     public int getNombreMax() {
         return nombreMax;
-    }
+    }*/
 }

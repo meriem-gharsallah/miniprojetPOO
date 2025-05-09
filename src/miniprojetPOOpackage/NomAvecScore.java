@@ -28,18 +28,6 @@ public class NomAvecScore {
 	public String toString() {
         return "Nom: " + nom + ", Score:" + score ;
     }
-	public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        NomAvecScore that = (NomAvecScore) o;
-        return Double.compare(that.score, score) == 0 &&
-               Objects.equals(nom, that.nom); 
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nom, score);
-    }
 }
 
 
