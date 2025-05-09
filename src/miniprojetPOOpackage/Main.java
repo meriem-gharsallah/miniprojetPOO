@@ -41,10 +41,17 @@ public class Main {
         default: throw new IllegalArgumentException("selectionneur inconnu : " + nom);
     }
     }
+    public static ComparateurApproximatifdeChaine getComparateurDeChaine(String nom) {
+        switch (nom) {
+            case "Levenshtein": return new ComparateurLevenshtein();
+            case "JaroWinkler": return new ComparateurJaroWinkler();
+            default: throw new IllegalArgumentException("Prétraiteur inconnu : " + nom);
+        }
+    }
 
     public static void main(String[] args) {
     	List<Nom> l=new ArrayList<Nom>();
-        Nom n1=new Nom(1,"meriem GHarsallah");
+        Nom n1=new Nom("NK-24isa6tapAYCqtEnqbUdzv","DEMIDOVICH VASILIJ");
         /*Nom n0=new Nom(1,"meriem GHarsallah");
         Nom n2=new Nom(2,"Hamza SOUssi");
         Nom n3=new Nom(3,"MOHamed SALAH abiD");

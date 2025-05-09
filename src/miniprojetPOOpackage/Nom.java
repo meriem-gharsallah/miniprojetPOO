@@ -2,10 +2,10 @@ package miniprojetPOOpackage;
 import java.util.Objects;
 
 public class Nom {
-    private int id;
+    private String id;
     private String nom;
 
-    public Nom(int id, String nom) {
+    public Nom(String id, String nom) {
         this.id = id;
         this.nom = nom;
     }
@@ -13,7 +13,7 @@ public class Nom {
         this.nom = autreNom.nom;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

@@ -3,8 +3,11 @@ package miniprojetPOOpackage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class RecuperateurCSV implements RecuperateurDeNoms {
 	
@@ -13,25 +16,19 @@ public class RecuperateurCSV implements RecuperateurDeNoms {
 		this.cheminFichier = cheminFichier;
 	}
 
-    @Override
-    public List<Nom> recuperer() {
-        List<Nom> liste = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(cheminFichier))) {
-            String ligne;
-            int id = 1;
-            while ((ligne = br.readLine()) != null) {
-                ligne = ligne.trim();
-                if (!ligne.isEmpty()) {
-                    Nom nom = new Nom(id++, ligne);
-                    liste.add(nom);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Erreur lors de la lecture du fichier : " + e.getMessage());
-        }
-
-        return liste;
-    }
+	@Override
+	public List<Nom> recuperer() {
+	try (Stream<String> lines = Files.lines(Paths.get(cheminFichier))) {
+	return lines.skip(1) // Skip the header line
+	.map(line -> line.split(","))
+	.filter(values -> values.length >= 2)
+	.map(values -> new Nom(values[0].trim(), values[1].trim()))
+	.toList();
+	} catch (IOException e) {
+	e.printStackTrace();
+	return List.of();
+	}
+	}
 
 	public String getCheminFichier() {
 		return cheminFichier;

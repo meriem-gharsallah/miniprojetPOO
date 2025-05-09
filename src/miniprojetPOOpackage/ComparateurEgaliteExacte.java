@@ -1,7 +1,7 @@
 package miniprojetPOOpackage;
 
 
-import java.util.Objects;
+//import java.util.Objects;
 
 public class ComparateurEgaliteExacte implements ComparateurNom {
 	public double comparer(Nom n1, Nom n2) {
