@@ -32,6 +32,7 @@ public class Main {
     	switch (nom) {
         //case "GenerateurDeCandidatsAvecIndex": return new GenerateurDeCandidatsAvecIndex();
         case "GenerateurDeCandidatsAleatoire": return new GenerateurDeCandidatsAleatoire();
+        case "GenerateurDeCandidatsAvecIndex": return new GenerateurDeCandidatsAvecIndex();
         default: throw new IllegalArgumentException("generateur inconnu : " + nom);
     }
     }
@@ -77,7 +78,7 @@ public class Main {
     	p.add("Pretraiteur aleatoire");
 
     	Configuration config=new Configuration(p, "Liste", "Nom Decompose",
-    			"GenerateurDeCandidatsAleatoire", "SelectionneurSeuil", 0.7, 10);
+    			"GenerateurDeCandidatsAvecIndex", "SelectionneurSeuil", 0.7, 10);
     	NomAvecScore n=new NomAvecScore(n1,2);
     	List<Pretraiteur> liste=new ArrayList<Pretraiteur>();
     	for(int i=0;i<config.getNomsPretraiteurs().size();i++) {
@@ -92,8 +93,18 @@ public class Main {
 		l5=m.rechercher(l, n1);
 		System.out.println(l5);
 		l6=m.dedupliquer(l);
-		System.out.println(l6);
-		//System.out.println(m.comparer(l,l2));
+		//System.out.println(l6);
+		List<Nom> A=new ArrayList<Nom>();
+		List<Nom> B=new ArrayList<Nom>();
+		Nom n7=new Nom("1","meriem gharsall");
+		Nom n8=new Nom("2","meriem gharsallah");
+		Nom n9=new Nom("3","edlkjle ejn ejl");
+		Nom n10=new Nom("4","mohamed ali ben jemaa");
+		A.add(n7);
+		A.add(n9);
+		B.add(n8);
+		B.add(n10);
+		System.out.println(m.comparer(A,B));
 		Scanner scanner = new Scanner(System.in);
         int choix = -1;
 

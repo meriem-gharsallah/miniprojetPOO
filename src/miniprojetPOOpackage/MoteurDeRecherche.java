@@ -73,16 +73,20 @@ public class MoteurDeRecherche {
 
 	public List<CoupleDeNomsAvecScore> comparer(List<Nom> L,List<Nom> L1) {
 		List<Nom> l2=appliquerPretraiteurs(L);
-		List<Nom> l3=appliquerPretraiteurs(L);
-		List<CoupleDeNoms> l4=generateur.generer(l2, l3);
+		List<Nom> l3=appliquerPretraiteurs(L1);
+		System.out.println(l2);
+		System.out.println(l3);
+		List<CoupleDeNoms> l4=Main.getGenerateur(configuration.getNomGenerateur()).generer(l2, l3);
+		System.out.println(l4);
 		List<CoupleDeNomsAvecScore> L2 = new ArrayList<>();
 		for(CoupleDeNoms c:l4) {
-			double comp=comparateur.comparer(c.getNom1(), c.getNom2());
+			double comp=Main.getComparateur(configuration.getNomComparateur())
+                    .comparer(c.getNom1(), c.getNom2());
 			CoupleDeNomsAvecScore c1=new CoupleDeNomsAvecScore(c.getNom1(),c.getNom2(),comp);
 			L2.add(c1);
 			
 		}
-		return L2;
+		return Main.getSelectionneur(configuration.getNomSelectionneur()).selectionner(L2);
 	}
 	
 }
