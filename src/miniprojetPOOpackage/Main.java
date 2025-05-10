@@ -93,7 +93,7 @@ public class Main {
 		System.out.println(l5);
 		l6=m.dedupliquer(l);
 		System.out.println(l6);
-		System.out.println(m.comparer(l,l2));
+		//System.out.println(m.comparer(l,l2));
 		Scanner scanner = new Scanner(System.in);
         int choix = -1;
 
