@@ -71,8 +71,17 @@ public class MoteurDeRecherche {
 	    return L1;
 	}
 
-	public List<NomAvecScore> comparer(List<Nom> L,List<Nom> L1) {
-		List<NomAvecScore> L2 = new ArrayList<>();
+	public List<CoupleDeNomsAvecScore> comparer(List<Nom> L,List<Nom> L1) {
+		List<Nom> l2=appliquerPretraiteurs(L);
+		List<Nom> l3=appliquerPretraiteurs(L);
+		List<CoupleDeNoms> l4=generateur.generer(l2, l3);
+		List<CoupleDeNomsAvecScore> L2 = new ArrayList<>();
+		for(CoupleDeNoms c:l4) {
+			double comp=comparateur.comparer(c.getNom1(), c.getNom2());
+			CoupleDeNomsAvecScore c1=new CoupleDeNomsAvecScore(c.getNom1(),c.getNom2(),comp);
+			L2.add(c1);
+			
+		}
 		return L2;
 	}
 	

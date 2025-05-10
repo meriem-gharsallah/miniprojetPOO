@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.LinkedHashMap;
 
 public class Main {
+	
 	public static Pretraiteur getPretraiteur(String nom) {
         switch (nom) {
             case "Normalisation": return new Normalisation();
@@ -17,6 +18,12 @@ public class Main {
     public static ComparateurNom getComparateur(String nom) {
     	switch (nom) {
         case "Egalite exacte": return new ComparateurEgaliteExacte();
+        
+        
+        case "Nom Decompose":List<String> listeDesNomsComparateursDeChaines=new ArrayList<String>();
+        listeDesNomsComparateursDeChaines.add("Levenshtein");
+        listeDesNomsComparateursDeChaines.add("JaroWinkler");
+        	return new ComparateurNomDecompose(listeDesNomsComparateursDeChaines);
         default: throw new IllegalArgumentException("comparateur inconnu : " + nom);
     }
     }
@@ -34,6 +41,7 @@ public class Main {
         case "SelectionneurAleatoire": return new SelectionneurAleatoire();
         case "SelectionneurNMeilleurs": return new SelectionneurNMeuilleurs(10);
         case "SelectionneurPourcentage": return new SelectionneurPourcentage(80);
+        case "SelectionneurSeuil": return new SelectionneurSeuil(0.7);
         default: throw new IllegalArgumentException("selectionneur inconnu : " + nom);
     }
     }
@@ -68,8 +76,8 @@ public class Main {
     	p.add("Pretraiteur aleatoire");
     	p.add("Pretraiteur aleatoire");
 
-    	Configuration config=new Configuration(p, "Liste", "Egalite exacte",
-    			"GenerateurDeCandidatsAleatoire", "SelectionneurAleatoire", 0.7, 10);
+    	Configuration config=new Configuration(p, "Liste", "Nom Decompose",
+    			"GenerateurDeCandidatsAleatoire", "SelectionneurSeuil", 0.7, 10);
     	NomAvecScore n=new NomAvecScore(n1,2);
     	List<Pretraiteur> liste=new ArrayList<Pretraiteur>();
     	for(int i=0;i<config.getNomsPretraiteurs().size();i++) {
@@ -85,6 +93,7 @@ public class Main {
 		System.out.println(l5);
 		l6=m.dedupliquer(l);
 		System.out.println(l6);
+		System.out.println(m.comparer(l,l2));
 		Scanner scanner = new Scanner(System.in);
         int choix = -1;
 

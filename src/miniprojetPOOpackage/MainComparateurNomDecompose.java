@@ -11,7 +11,7 @@ public class MainComparateurNomDecompose {
         listeDesNomsComparateursDeChaines.add("Levenshtein");
         listeDesNomsComparateursDeChaines.add("JaroWinkler");
         
-        ComparateurMotDecompose c=new ComparateurMotDecompose(listeDesNomsComparateursDeChaines);
+        ComparateurNomDecompose c=new ComparateurNomDecompose(listeDesNomsComparateursDeChaines);
         
         System.out.println(c.comparer(n1, n2));
 
