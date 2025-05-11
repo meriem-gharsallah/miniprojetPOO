@@ -75,27 +75,19 @@ public class MoteurDeRecherche {
                    .selectionner(resultats);
     }
 
-	public List<Nom> dedupliquer(List<Nom> L) {
-	    List<Nom> L1 = new ArrayList<Nom>();
-	    
+    public List<Nom> dedupliquer(List<Nom> L) {
+        List<Nom> L1 = new ArrayList<>();
 
-	    for (int i = 0; i < L.size(); i++) {
-	        boolean estDoublon = false;
+        for (Nom nom : L) {
+            List<CoupleDeNomsAvecScore> similaires = rechercher(L1, nom);
+            if (similaires.isEmpty()) {
+                L1.add(nom);
+            }
+        }
 
-	        for (int j = 0; j < L1.size(); j++) {
-	            if (Main.getComparateur(configuration.getNomComparateur()).comparer(L.get(i), L1.get(j)) >= configuration.getSeuil()) {
-	                estDoublon = true;
-	                break;
-	            }
-	        }
+        return L1;
+    }
 
-	        if (!estDoublon) {
-	            L1.add(L.get(i));
-	        }
-	    }
-
-	    return L1;
-	}
 
 	
 
