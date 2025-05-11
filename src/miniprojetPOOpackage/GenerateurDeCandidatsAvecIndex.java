@@ -27,7 +27,7 @@ public class GenerateurDeCandidatsAvecIndex implements GenerateurDeCandidats {
 	                }
 	            }
 	        }
-	    
+	    //jjjjjj
 	    return L2;
 	}
 }
