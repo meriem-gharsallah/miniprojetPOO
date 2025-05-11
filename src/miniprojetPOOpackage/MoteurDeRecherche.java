@@ -41,18 +41,14 @@ public class MoteurDeRecherche {
         List<Nom> listePretraitee = new ArrayList<>(liste);
         Nom copie = new Nom(n);  // Copie du nom recherché (non modifié)
         
-        // Appliquer les prétraiteurs
         listePretraitee = appliquerPretraiteurs(listePretraitee);
         Nom copiePretraitee = appliquerPretraiteurs(List.of(copie)).get(0);
         
-        // Générer les couples pour comparaison
+     
         List<CoupleDeNoms> couples = Main.getGenerateur(configuration.getNomGenerateur())
                                          .generer(listePretraitee, List.of(copiePretraitee));
 
         List<CoupleDeNomsAvecScore> resultats = new ArrayList<>();
-        
-        // Affichage : nom recherché avant prétraitement
-
         for (int i = 0; i < couples.size(); i++) {
             Nom nomOriginal = liste.get(i);  // nom original issu du fichier
             Nom nomPretraite = listePretraitee.get(i);
@@ -60,17 +56,9 @@ public class MoteurDeRecherche {
 
             double score = Main.getComparateur(configuration.getNomComparateur())
                                .comparer(nomPretraite, nomRecherchePretraite);
-
-            // Créer et ajouter le couple avec score
             resultats.add(new CoupleDeNomsAvecScore(nomOriginal, n, score));
 
-            /*Affichage ligne par ligne
-            System.out.println("Nom (non prétraité) : " + nomOriginal.getNom());
-            System.out.println("Score avec le nom recherché : " + score);
-            System.out.println("----------------------------------------");
-        }*/
         }
-        // Appliquer le sélectionneur
         return Main.getSelectionneur(configuration.getNomSelectionneur(), configuration)
                    .selectionner(resultats);
     }
@@ -93,7 +81,6 @@ public class MoteurDeRecherche {
 
 
 	public List<CoupleDeNomsAvecScore> comparer(List<Nom> L,List<Nom> L1) {
-		//List<Nom> l2=appliquerPretraiteurs(L1);
 		List<CoupleDeNomsAvecScore> L2 = new ArrayList<>();
 		for (Nom n:L) {
 			

@@ -425,7 +425,7 @@ public class Main {
         case "SelectionneurAleatoire": return new SelectionneurAleatoire();
         case "SelectionneurNMeilleurs": return new SelectionneurNMeuilleurs(config);
         case "SelectionneurPourcentage": return new SelectionneurPourcentage(config);
-        case "SelectionneurSeuil": return new SelectionneurPourcentage(config);
+        case "SelectionneurSeuil": return new SelectionneurSeuil(config);
         default: throw new IllegalArgumentException("selectionneur inconnu : " + nom);
     }
     }

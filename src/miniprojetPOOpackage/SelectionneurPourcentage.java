@@ -10,7 +10,7 @@ public class SelectionneurPourcentage implements SelectionneurDeResultats {
     	this.config=config;
     }
 public List<CoupleDeNomsAvecScore> selectionner(List<CoupleDeNomsAvecScore> noms) {
-	double p = config.getNombreMax();
+	double p = config.getPourcentage();
     if (noms == null || noms.isEmpty() || p <= 0) {
         return new ArrayList<CoupleDeNomsAvecScore>();
     }

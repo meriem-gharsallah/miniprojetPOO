@@ -9,9 +9,9 @@ public class SelectionneurSeuil implements SelectionneurDeResultats {
     public SelectionneurSeuil(Configuration config) {
     	this.config=config;
     }
-    double s = config.getNombreMax();
+    
     public List<CoupleDeNomsAvecScore> selectionner(List<CoupleDeNomsAvecScore> noms) {
-    	
+    	double s = config.getSeuil();
         List<CoupleDeNomsAvecScore> filtrés = new ArrayList<>();
 
         if (noms == null || noms.isEmpty()) {
@@ -27,11 +27,5 @@ public class SelectionneurSeuil implements SelectionneurDeResultats {
         return filtrés;
     }
 
-    public double getS() {
-        return s;
-    }
-
-    public void setS(double s) {
-        this.s = s;
-    }
+   
 }
