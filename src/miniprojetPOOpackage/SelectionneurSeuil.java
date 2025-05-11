@@ -4,12 +4,14 @@ import java.util.List;
 
 public class SelectionneurSeuil implements SelectionneurDeResultats {
 
-    private double s;
+	private  Configuration config;
 
-    public SelectionneurSeuil(double s) {
-        this.s = s;
+    public SelectionneurSeuil(Configuration config) {
+    	this.config=config;
     }
+    double s = config.getNombreMax();
     public List<CoupleDeNomsAvecScore> selectionner(List<CoupleDeNomsAvecScore> noms) {
+    	
         List<CoupleDeNomsAvecScore> filtrés = new ArrayList<>();
 
         if (noms == null || noms.isEmpty()) {
@@ -33,4 +35,3 @@ public class SelectionneurSeuil implements SelectionneurDeResultats {
         this.s = s;
     }
 }
-

@@ -6,12 +6,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SelectionneurNMeuilleurs implements SelectionneurDeResultats {
-    int N;
-
-    public SelectionneurNMeuilleurs(int N) {
-        this.N = N;
+	private  Configuration config;
+    public SelectionneurNMeuilleurs(Configuration config) {
+    	this.config=config;
+        
     }
     public List<CoupleDeNomsAvecScore> selectionner(List<CoupleDeNomsAvecScore> noms) {
+    	int N = config.getNombreMax();
     	List<CoupleDeNomsAvecScore> copie = new ArrayList<>(noms);
         Comparator<CoupleDeNomsAvecScore> comparateurCroissant = new Comparator<CoupleDeNomsAvecScore>() {
             public int compare(CoupleDeNomsAvecScore a, CoupleDeNomsAvecScore b) {
@@ -24,3 +25,4 @@ public class SelectionneurNMeuilleurs implements SelectionneurDeResultats {
         return new ArrayList<>(copie.subList(0, taille));
     }
 }
+

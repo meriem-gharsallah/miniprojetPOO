@@ -14,7 +14,7 @@ public class MainSelectionneurSeuil {
         CoupleDeNomsAvecScore c2=new CoupleDeNomsAvecScore(n3,n4,0.8);
         l.add(c1);
         l.add(c2);
-        SelectionneurSeuil s=new SelectionneurSeuil(0.9);
-        System.out.println(s.selectionner(l));
+        //SelectionneurSeuil s=new SelectionneurSeuil(0.9);
+        //System.out.println(s.selectionner(l));
         }
     }
