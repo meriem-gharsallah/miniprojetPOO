@@ -15,8 +15,8 @@ public class Main {
         List<String> p=new ArrayList<String>();
     	p.add("Normalisation");
     	
-        Configuration config=new Configuration(p, "Egalite exacte",
-    			"GenerateurDeCandidatsAleatoire", "SelectionneurSeuil");
+        Configuration config=new Configuration(p, "Nom décomposé",
+    			"GenerateurDeCandidatsAvecIndex", "SelectionneurSeuil");
         config.setNombreMax(10);
         config.setSeuil(0.8);
         config.setPourcentage(50);
@@ -246,7 +246,7 @@ public class Main {
     private static void choisirMesuresDeComparaison(Scanner scanner, Configuration config) {
         System.out.println("\n--- Choisir un comparateur ---");
         System.out.println("1. Egalité exacte");
-        System.out.println("2. Mot décomposé");
+        System.out.println("2. Nom décomposé");
 
         System.out.print("Entrez le numéro du comparateur à utiliser : ");
         String input = scanner.nextLine();
@@ -371,7 +371,7 @@ public class Main {
         
         System.out.println("1. Generateur de candidats Aleatoire");
         System.out.println("2. Generateur de candidats Avec Index");
-        System.out.println("2. Generateur de candidats Avec Taille");
+        System.out.println("3. Generateur de candidats Avec Taille");
 
         
         System.out.print("Entrez le numéro du sélectionneur à utiliser : ");
@@ -450,22 +450,38 @@ public class Main {
     }
     }
     public static ComparateurNom getComparateur(String nom) {
-    	    switch (nom) {
-    	        case "Egalite exacte": return new ComparateurEgaliteExacte();}
-    	        if (nom.startsWith("MotDecompose(") && nom.endsWith(")")) {
-    	        String contenu = nom.substring("MotDecompose(".length(), nom.length() - 1);
-    	        String[] nomdivise = contenu.split(",");
 
-    	        List<String> comparateurs = new ArrayList<>();
-    	        for (String s : nomdivise) {
-    	            comparateurs.add(s.trim());
-    	        }
+	    switch (nom) {
 
-    	        return new ComparateurNomDecompose(comparateurs);
-    	    }
-        throw new IllegalArgumentException("comparateur inconnu : " + nom);
-    
-    }
+	        case "Egalite exacte": return new ComparateurEgaliteExacte();}
+
+	        if (nom.startsWith("MotDecompose(") && nom.endsWith(")")) {
+
+	        String contenu = nom.substring("MotDecompose(".length(), nom.length() - 1);
+
+	        String[] nomdivise = contenu.split(",");
+
+
+
+	        List<String> comparateurs = new ArrayList<>();
+
+	        for (String s : nomdivise) {
+
+	            comparateurs.add(s.trim());
+
+	        }
+
+
+
+	        return new ComparateurNomDecompose(comparateurs);
+
+	    }
+
+    throw new IllegalArgumentException("comparateur inconnu : " + nom);
+
+
+
+}
     public static ComparateurApproximatifdeChaine getComparateurDeChaine(String nom) {
         switch (nom) {
             case "Levenshtein": return new ComparateurLevenshtein();
@@ -473,7 +489,7 @@ public class Main {
             default: throw new IllegalArgumentException("comparateur inconnu : " + nom);
         }
     }
-
+   
 }
 
 

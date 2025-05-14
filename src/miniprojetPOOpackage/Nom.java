@@ -42,11 +42,11 @@ public class Nom {
     public int hashCode() {
         return Objects.hash(id, nom.toLowerCase());
     }
-    public TupleN genererListeDeChaines(Nom n) {
+    public List<String> genererListeDeChaines(Nom n) {
         Pretraiteur p = new PretraiteurAleatoire();
         Nom nomPretraite = p.pretraiter(List.of(n)).get(0);
         List<String> L = List.of(nomPretraite.getNom().split("\\s+"));
-        return new TupleN(L);
+        return L;
     }
     public static List<String> genererToutesLesConcatenations(List<String> mots) {
         List<String> resultats = new ArrayList<>();

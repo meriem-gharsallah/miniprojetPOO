@@ -23,7 +23,7 @@ public class SelectionneurSeuil implements SelectionneurDeResultats {
                 filtrés.add(nas);
             }
         }
-
+        filtrés.sort((a, b) -> Double.compare(b.getScore(), a.getScore()));
         return filtrés;
     }
 

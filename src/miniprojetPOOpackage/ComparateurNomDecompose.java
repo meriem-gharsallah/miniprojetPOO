@@ -11,7 +11,7 @@ public class ComparateurNomDecompose implements ComparateurNom {
 	    /*List<String> motsModifiables = new ArrayList<>(n1.genererListeDeChaines(n1).getElements());
 	    List<String> L = n1.genererToutesLesConcatenations(motsModifiables);*/
 	    
-	    List<String> motsModifiables1 = new ArrayList<>(n2.genererListeDeChaines(n2).getElements());
+	    List<String> motsModifiables1 = new ArrayList<>(n2.genererListeDeChaines(n2));
 	    List<String> L1 = n2.genererToutesLesConcatenations(motsModifiables1);
 
 	    List<Double> L2 = new ArrayList<>();
