@@ -51,14 +51,26 @@ public class Main {
                     		listepretraiteur.add(getPretraiteur(config.getNomsPretraiteurs().get(i)));}
                 			
                         MoteurDeRecherche m=new MoteurDeRecherche(Main.getGenerateur(config.getNomGenerateur()), Main.getSelectionneur(config.getNomSelectionneur(),config),
-                        		listepretraiteur, Main.getComparateur(config.getNomComparateur()), config,0.7, 10,20);
+                        		listepretraiteur, Main.getComparateur(config.getNomComparateur()), config,config.getSeuil(), config.getNombreMax(),config.getPourcentage());
                 		List<CoupleDeNomsAvecScore> l9=new ArrayList<CoupleDeNomsAvecScore>();
                 		l9=m.rechercher(l, n);
                 		System.out.println("Nom recherché: " + n.getNom());
                         System.out.println("\nComparaison avec les noms du fichier :");
-                		for (CoupleDeNomsAvecScore c:l9) {
-                			System.out.println(c.getNom1()+":"+c.getScore());
-                		}
+
+                        if (l9.isEmpty()) {
+
+                            System.out.println("Aucun nom correspondant trouvé dans le fichier.");
+
+                        } else {
+
+                            for (CoupleDeNomsAvecScore c : l9) {
+
+                                System.out.println(c.getNom1() + " : " + c.getScore());
+
+                            }
+
+                        }
+                		
                         break;
              
                     case 2:
@@ -359,6 +371,8 @@ public class Main {
         
         System.out.println("1. Generateur de candidats Aleatoire");
         System.out.println("2. Generateur de candidats Avec Index");
+        System.out.println("2. Generateur de candidats Avec Taille");
+
         
         System.out.print("Entrez le numéro du sélectionneur à utiliser : ");
 
@@ -378,7 +392,11 @@ public class Main {
                         
                         System.out.println("Génerateur choisi : GenerateurDeCandidatsAvecIndex");
                         break;
+                    case 3:
+                        config.setNomGenerateur("GenerateurDeCandidatsAvecTaille");
                         
+                        System.out.println("Génerateur choisi : GenerateurDeCandidatsAvecTaille");
+                        break;
                     
                     default:
                         System.out.println("Numéro invalide. Veuillez choisir entre 1 et 4.");
@@ -416,6 +434,8 @@ public class Main {
     	switch (nom) {
         case "GenerateurDeCandidatsAvecIndex": return new GenerateurDeCandidatsAvecIndex();
         case "GenerateurDeCandidatsAleatoire": return new GenerateurDeCandidatsAleatoire();
+        case "GenerateurDeCandidatsAvecTaille": return new GenerateurDeCandidatsAvecTaille();
+
         default: throw new IllegalArgumentException("generateur inconnu : " + nom);
     }
     }

@@ -1,7 +1,9 @@
 package miniprojetPOOpackage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MoteurDeRecherche {
     private GenerateurDeCandidats generateur;
@@ -37,28 +39,36 @@ public class MoteurDeRecherche {
         return noms;
     }
     public List<CoupleDeNomsAvecScore> rechercher(List<Nom> liste, Nom n) {
-        // Copier la liste de noms pour appliquer les prétraiteurs sans modifier l'original
         List<Nom> listePretraitee = new ArrayList<>(liste);
-        Nom copie = new Nom(n);  // Copie du nom recherché (non modifié)
-        
+        Nom copie = new Nom(n);  // Copie non modifiée
+
+        // Prétraitement
         listePretraitee = appliquerPretraiteurs(listePretraitee);
         Nom copiePretraitee = appliquerPretraiteurs(List.of(copie)).get(0);
-        
-     
+
+        // Génération des couples
         List<CoupleDeNoms> couples = Main.getGenerateur(configuration.getNomGenerateur())
                                          .generer(listePretraitee, List.of(copiePretraitee));
 
+        // Création du dictionnaire d'accès rapide ID → Nom original
+        Map<String, Nom> idToNomOriginal = new HashMap<>();
+        for (Nom nomOriginal : liste) {
+            idToNomOriginal.put(nomOriginal.getId(), nomOriginal);
+        }
+
         List<CoupleDeNomsAvecScore> resultats = new ArrayList<>();
-        for (int i = 0; i < couples.size(); i++) {
-            Nom nomOriginal = liste.get(i);  // nom original issu du fichier
-            Nom nomPretraite = listePretraitee.get(i);
-            Nom nomRecherchePretraite = copiePretraitee;
+
+        for (CoupleDeNoms couple : couples) {
+            Nom nomOriginal = idToNomOriginal.get(couple.getNom1().getId());
+
+            if (nomOriginal == null) continue; // sécurité
 
             double score = Main.getComparateur(configuration.getNomComparateur())
-                               .comparer(nomPretraite, nomRecherchePretraite);
-            resultats.add(new CoupleDeNomsAvecScore(nomOriginal, n, score));
+                               .comparer(couple.getNom1(), couple.getNom2());
 
+            resultats.add(new CoupleDeNomsAvecScore(nomOriginal, n, score));
         }
+
         return Main.getSelectionneur(configuration.getNomSelectionneur(), configuration)
                    .selectionner(resultats);
     }

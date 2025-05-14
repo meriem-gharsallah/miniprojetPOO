@@ -10,24 +10,31 @@ public class GenerateurDeCandidatsAvecIndex implements GenerateurDeCandidats {
 
 		// Remplir la map avec les noms groupés par taille
 		for (Nom n : liste1) {
+		
+			
 		    int taille = n.getNom().length();
+		    
 		    mapTaille.computeIfAbsent(taille, k -> new ArrayList<>()).add(n);
+		    
 		}
 		System.out.println(mapTaille);
+		
 
 	    for (Nom n2 : liste2) {
 	            int taille2 = n2.getNom().length();
-
+	            System.out.println(taille2 -5);
 	            // Vérifier les tailles de taille2 - 5 à taille2 + 5
-	            for (int i = taille2 - 5; i <= taille2 + 5; i++) {
+	            for (int i = (taille2 - 5); i <= (taille2 + 5); i++) {
 	                if (mapTaille.containsKey(i)) {
 	                    for (Nom n1 : mapTaille.get(i)) {
 	                        L2.add(new CoupleDeNoms(n1, n2));
 	                    }
 	                }
 	            }
+	           
 	        }
-	    //jjjjjj
+	    //System.out.println(L2);
+	   
 	    return L2;
 	}
 }
