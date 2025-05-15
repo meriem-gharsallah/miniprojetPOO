@@ -15,7 +15,7 @@ public class Main {
         List<String> p=new ArrayList<String>();
     	p.add("Normalisation");
     	
-        Configuration config=new Configuration(p, "Nom décomposé",
+        Configuration config=new Configuration(p, "Nom Decompose(Levenshtein,JaroWinkler)",
     			"GenerateurDeCandidatsAvecIndex", "SelectionneurSeuil");
         config.setNombreMax(10);
         config.setSeuil(0.8);
@@ -246,7 +246,7 @@ public class Main {
     private static void choisirMesuresDeComparaison(Scanner scanner, Configuration config) {
         System.out.println("\n--- Choisir un comparateur ---");
         System.out.println("1. Egalité exacte");
-        System.out.println("2. Nom décomposé");
+        System.out.println("2. Nom Decompose");
 
         System.out.print("Entrez le numéro du comparateur à utiliser : ");
         String input = scanner.nextLine();
@@ -294,7 +294,7 @@ public class Main {
                         }
 
                         // Crée un nom logique (tu peux adapter)
-                        String nomComparateurCompose = "MotDecompose(" + String.join(",", choisis) + ")";
+                        String nomComparateurCompose = "Nom Decompose(" + String.join(",", choisis) + ")";
                         config.setNomComparateur(nomComparateurCompose);
                         System.out.println("Comparateur sélectionné : " + nomComparateurCompose);
                         break;
@@ -443,9 +443,9 @@ public class Main {
     public static SelectionneurDeResultats getSelectionneur(String nom,Configuration config) {
     	switch (nom) {
         case "SelectionneurAleatoire": return new SelectionneurAleatoire();
-        case "SelectionneurNMeilleurs": return new SelectionneurNMeuilleurs(config);
-        case "SelectionneurPourcentage": return new SelectionneurPourcentage(config);
-        case "SelectionneurSeuil": return new SelectionneurSeuil(config);
+        case "SelectionneurNMeilleurs": return new SelectionneurNMeuilleurs(config.getNombreMax());
+        case "SelectionneurPourcentage": return new SelectionneurPourcentage(config.getPourcentage());
+        case "SelectionneurSeuil": return new SelectionneurSeuil(config.getSeuil());
         default: throw new IllegalArgumentException("selectionneur inconnu : " + nom);
     }
     }
@@ -455,9 +455,9 @@ public class Main {
 
 	        case "Egalite exacte": return new ComparateurEgaliteExacte();}
 
-	        if (nom.startsWith("MotDecompose(") && nom.endsWith(")")) {
+	        if (nom.startsWith("Nom Decompose(") && nom.endsWith(")")) {
 
-	        String contenu = nom.substring("MotDecompose(".length(), nom.length() - 1);
+	        String contenu = nom.substring("Nom Decompose(".length(), nom.length() - 1);
 
 	        String[] nomdivise = contenu.split(",");
 

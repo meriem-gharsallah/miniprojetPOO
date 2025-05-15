@@ -5,12 +5,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SelectionneurPourcentage implements SelectionneurDeResultats {
-	private  Configuration config;
-    public SelectionneurPourcentage(Configuration config) {
-    	this.config=config;
+	private  double p;
+    public SelectionneurPourcentage(double p) {
+    	this.p=p;
     }
 public List<CoupleDeNomsAvecScore> selectionner(List<CoupleDeNomsAvecScore> noms) {
-	double p = config.getPourcentage();
+	
     if (noms == null || noms.isEmpty() || p <= 0) {
         return new ArrayList<CoupleDeNomsAvecScore>();
     }
