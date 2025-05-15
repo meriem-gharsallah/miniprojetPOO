@@ -50,19 +50,21 @@ public class Nom {
     }
     public static List<String> genererToutesLesConcatenations(List<String> mots) {
         List<String> resultats = new ArrayList<>();
-        genererPermutations(mots, 0, resultats);
-        return resultats;
-    }
-    private static void genererPermutations(List<String> mots, int index, List<String> resultats) {
-        if (index == mots.size()) {
-            resultats.add(String.join(" ", mots)); // Concatène les mots avec un espace
-            return;
+        int n = mots.size();
+        int total = 1 << n; // 2^n combinaisons possibles
+
+        for (int i = 1; i < total; i++) {
+            List<String> combinaison = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) != 0) {
+                    combinaison.add(mots.get(j));
+                }
+            }
+            resultats.add(String.join(" ", combinaison));
         }
 
-        for (int i = index; i < mots.size(); i++) {
-            Collections.swap(mots, index, i);
-            genererPermutations(mots, index + 1, resultats);
-            Collections.swap(mots, index, i); // backtrack
-        }
+        return resultats;
     }
-}
+
+
+    }

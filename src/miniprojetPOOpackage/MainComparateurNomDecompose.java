@@ -14,6 +14,11 @@ public class MainComparateurNomDecompose {
         ComparateurNomDecompose c=new ComparateurNomDecompose(listeDesNomsComparateursDeChaines);
         
         System.out.println(c.comparer(n1, n2));
+        Nom nom1 = new Nom("","huda ben amer");
+        Nom nom2 = new Nom("","houda amer");
+
+        System.out.println("JaroWinkler : " +c.comparer(nom2, nom1));
+        System.out.println("Levenshtein : " + new ComparateurLevenshtein().comparer(nom1.getNom(), nom2.getNom()));;
 
         
         

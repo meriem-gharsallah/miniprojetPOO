@@ -22,7 +22,7 @@ public class GenerateurDeCandidatsAvecIndex implements GenerateurDeCandidats {
 
 	    for (Nom n2 : liste2) {
 	            int taille2 = n2.getNom().length();
-	            for (int i = (taille2 - 5); i <= (taille2 + 5); i++) {
+	            for (int i = (taille2 - 8); i <= (taille2 + 8); i++) {
 	                if (mapTaille.containsKey(i)) {
 	                    for (Nom n1 : mapTaille.get(i)) {
 	                        L2.add(new CoupleDeNoms(n1, n2));

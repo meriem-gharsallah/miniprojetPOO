@@ -11,25 +11,25 @@ public class ComparateurNomDecompose implements ComparateurNom {
 	    /*List<String> motsModifiables = new ArrayList<>(n1.genererListeDeChaines(n1).getElements());
 	    List<String> L = n1.genererToutesLesConcatenations(motsModifiables);*/
 	    
-	    List<String> motsModifiables1 = new ArrayList<>(n2.genererListeDeChaines(n2));
-	    List<String> L1 = n2.genererToutesLesConcatenations(motsModifiables1);
-
+	    List<String> motsModifiables1 = new ArrayList<>(n1.genererListeDeChaines(n1));
+	    List<String> L1 = n1.genererToutesLesConcatenations(motsModifiables1);
+	    //System.out.print(L1);
 	    List<Double> L2 = new ArrayList<>();
 	    List<Double> L3 = new ArrayList<>();
 	    
 	    int taille = listeDesNomsComparateursDeChaines.size();
-	    double ponderation = 1.0 / taille;
+	    double coefficient = 1.0 / taille;
 
 	    for (String s : L1) {
 	        /*for (String s1 : L1) {*/
 	            double moyenne = 0.0;
 	            for (String s2 : listeDesNomsComparateursDeChaines) {
 	                ComparateurApproximatifdeChaine c = Main.getComparateurDeChaine(s2);
-	                double score = c.comparer(s, n1.getNom());
+	                double score = c.comparer(s, n2.getNom());
 	                L2.add(score);
 	            }
 	            for (double d : L2) {
-	                moyenne += ponderation * d;
+	                moyenne += coefficient * d;
 	            }
 
 	            L3.add(moyenne);
