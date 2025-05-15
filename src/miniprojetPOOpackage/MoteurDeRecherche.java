@@ -53,15 +53,15 @@ public class MoteurDeRecherche {
                                          .generer(listePretraitee, List.of(copiePretraitee));
 
         // Création du dictionnaire  ID ,Nom original
-        Map<String, Nom> idToNomOriginal = new HashMap<>();
+        Map<String, Nom> original = new HashMap<>();
         for (Nom nomOriginal : liste) {
-            idToNomOriginal.put(nomOriginal.getId(), nomOriginal);
+            original.put(nomOriginal.getId(), nomOriginal);
         }
 
         List<CoupleDeNomsAvecScore> resultats = new ArrayList<>();
 
         for (CoupleDeNoms couple : couples) {
-            Nom nomOriginal = idToNomOriginal.get(couple.getNom1().getId());
+            Nom nomOriginal = original.get(couple.getNom1().getId());
 
             if (nomOriginal == null) continue; 
 
@@ -128,9 +128,9 @@ public class MoteurDeRecherche {
 
         // prétraiter L1 une seule fois
         List<Nom> L1Pretraitee = appliquerPretraiteurs(new ArrayList<>(L1));
-        Map<String, Nom> idToOriginalL1 = new HashMap<>();
+        Map<String, Nom> originalL1 = new HashMap<>();
         for (int i = 0; i < L1.size(); i++) {
-            idToOriginalL1.put(L1Pretraitee.get(i).getId(), L1.get(i));
+            originalL1.put(L1Pretraitee.get(i).getId(), L1.get(i));
         }
 
         // indexer L1 par taille
@@ -150,7 +150,7 @@ public class MoteurDeRecherche {
                 for (Nom autreNom : indexParTaille.get(t)) {
                 	double score = comparateur.comparer(autreNom, nomPretraite);
                 	if (score >= 0.99) {
-                	    Nom original = idToOriginalL1.get(autreNom.getId());
+                	    Nom original = originalL1.get(autreNom.getId());
                 	    resultats.add(new CoupleDeNomsAvecScore(original, nom, score));
                 	}
 
